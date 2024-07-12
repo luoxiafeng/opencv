@@ -9,41 +9,18 @@ Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查�
 import cv2
 import sys
 import numpy as np
+import image_ops 
+import os
 
-#print current pwd
-path = "D:\\opencv\\pic\\1.png"
+path = "D:\\intchains\\opencv\\pic\\1.png"
+if not os.path.exists(path):
+    print(f"File not found: {path}")
+    sys.exit(1)
 
+img = image_ops.imageOps.loadImage(path)
+image_ops.imageOps.getPixelValue(img, 100, 100)
+image_ops.imageOps.getPixelRGBValue(img, 100, 100)
+image_ops.imageOps.getImageShape(img)
+image_ops.imageOps.getImageDataType(img)
+image_ops.imageOps.showImage(img)
 
-def getPixelValue(img, x, y):
-    print(img[x, y])
-    
-def getPixelRGBValue(img, x, y):
-    print("B: ", img[x, y, 0])
-    print("G: ", img[x, y, 1])
-    print("R: ", img[x, y, 2])
-
-def getImageShape(img):
-    print(img.shape)  
-    
-def getImageDataType(img):
-    print(img.dtype)  
-    
-def loadImage(path):
-    try:
-        img = cv2.imread(path)
-        return img
-    except:
-        print("Error loading image")
-        sys.exit(1)
-
-def showImage(img):
-    cv2.imshow('image', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-img = loadImage(path)
-getPixelValue(img, 100, 100)
-getPixelRGBValue(img, 100, 100)
-getImageShape(img)
-getImageDataType(img)
-showImage(img)
